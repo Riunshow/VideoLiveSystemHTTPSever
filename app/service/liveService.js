@@ -63,19 +63,24 @@ class LiveService extends Service {
     }
     return message;
   }
-  // async applicationRoom(roomID,token) {
   async applicationRoom(userID, cover, title) {
-    console.log(this.session)
+    console.log(userID)
     let message;
-    const data = await this.LiveModel.findOrCreate({
-      where: { user_id: userID },
-      defaults: {
-        cover,
-        title,
-      },
-    });
-    if (data[data.length - 1]) message = { error: false, data: '创建成功' };
-    else message = { error: true, data: '该用户已经拥有直播间' };
+    if (!userID) {
+      console.log(23333);
+      message = { error: true, data: '未登录' }
+    }else {
+      const data = await this.LiveModel.findOrCreate({
+        where: { user_id: userID },
+        defaults: {
+          cover,
+          title,
+        },
+      });
+      if (data[data.length - 1]) message = { error: false, data: '创建成功' };
+      else message = { error: true, data: '该用户已经拥有直播间' };
+    }
+
     return message;
   }
 

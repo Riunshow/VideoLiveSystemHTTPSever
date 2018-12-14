@@ -223,6 +223,7 @@
     "path": "/api/live/application",
     "regexp": "/^\\/api\\/live\\/application(?:\\/(?=$))?$/",
     "stack": [
+      "anonymous",
       "wrappedController"
     ]
   },

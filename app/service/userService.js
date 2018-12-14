@@ -56,7 +56,7 @@ class UserService extends Service {
     }
     return {
       error: true,
-      data: '账号密码错误',
+      data: '用户名或密码错误',
     };
   }
   async modifyInfo(userID, nickname, avatar) {

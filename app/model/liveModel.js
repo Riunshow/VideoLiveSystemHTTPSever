@@ -34,8 +34,6 @@ module.exports = app => {
     freezeTableName: true,
   });
 
-  // LiveModel.sync({force: false})
-
   LiveModel.getAllRoom = async function(limit, offset) {
     return await this.findAll({
       limit,

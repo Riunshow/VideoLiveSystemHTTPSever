@@ -7,7 +7,6 @@ class LiveController extends Controller {
     super(ctx);
     this.session = this.ctx.session
     this.live = ctx.service.liveService;
-    console.log('22222222');
   }
   async getLiveList() {
     const { offset, limit } = this.ctx.params;
@@ -25,8 +24,7 @@ class LiveController extends Controller {
     this.ctx.body = response;
   }
   async applicationRoom() {
-    console.log('room: ', this.session)
-    const userID = this.ctx.session.user.userID;
+    const userID = this.ctx.session.user ? this.ctx.session.user.userID : null;
     const { title, cover } = this.ctx.request.body;
     const response = await this.live.applicationRoom(userID, title, cover);
     this.ctx.body = response;

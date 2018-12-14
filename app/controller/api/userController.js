@@ -20,7 +20,7 @@ class UserController extends Controller {
       rememberMe,
     } = this.ctx.request.body;
     const response = await this.userService.login(username, password);
-    if (response.error) this.ctx.status = 403;
+    // if (response.error) this.ctx.status = 403;
     if (!response.error && rememberMe) this.ctx.session.maxAge = ms('30d');
 
     this.ctx.body = response;

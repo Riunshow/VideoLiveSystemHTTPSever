@@ -52,8 +52,7 @@ module.exports = app => {
 
   router.put('/api/live/:roomID/info', owned, controller.api.liveController.changeRoomInfo);
 
-  // router.post('/live/application', isStreamer, controller.api.liveController.applicationRoom);
-  router.post('/api/live/application', controller.api.liveController.applicationRoom);
+  router.post('/api/live/application', isStreamer, controller.api.liveController.applicationRoom);
 
   router.delete('/api/live/:roomID', owned, controller.api.liveController.startLiveStream);
 

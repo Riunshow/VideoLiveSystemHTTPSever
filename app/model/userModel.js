@@ -39,7 +39,6 @@ module.exports = app => {
     updated_at: 'updated_at',
     freezeTableName: true,
   });
-  // UserModel.sync({force: false})
 
   UserModel.findUser = async function(username) {
     return await this.findOne({
