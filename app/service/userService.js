@@ -33,9 +33,12 @@ class UserService extends Service {
   }
   async login(username, password) {
     const user =  await this.UserModel.findUser(username) || null;
+    
     if (user && await this.ctx.compare(password, user.get('password'))) {
-      console.log(user.get('id'))
+      console.log('user service login: '， user.get('id'))
+
       const role = user.get('role');
+
       this.ctx.session.user = {
         userID: user.get('id'),
         isStreamer: role === 1,

@@ -1,10 +1,20 @@
-'use strict';
+'use strict'
 
 module.exports = app => {
   const {
     STRING,
     INTEGER,
-  } = app.Sequelize;
+  } = app.Sequelize
+
+  /**
+   * @desc user 用户表
+   * id: id
+   * username: 登录账户
+   * nickname: 用户昵称
+   * password: 用户密码
+   * avatar: 用户头像
+   * role: 用户权限
+   */
   const UserModel = app.model.define('user', {
     id: {
       type: INTEGER(20),
@@ -32,37 +42,52 @@ module.exports = app => {
     role: {
       type: INTEGER(3),
       allowNull: false,
-      defaultValue: 0, // -1为封禁用户，0为普通用户，1为主播，2为管理员
+      defaultValue: 0, // -1为封禁用户,0为普通用户,1为主播,2为管理员
     },
+    price: {
+      type: INTEGER(20),
+      allowNull: false,
+      defaultValue: 0,
+    }
   }, {
     created_at: 'created_at',
     updated_at: 'updated_at',
     freezeTableName: true,
-  });
+  })
 
-  UserModel.findUser = async function(username) {
+  UserModel.findUser = async function (username) {
     return await this.findOne({
       where: {
         username,
       },
-    });
-  };
-  UserModel.getAllUser = async function(limit, offset) {
+    })
+  }
+
+  UserModel.getAllUser = async function (limit, offset) {
     return await this.findAll({
       limit,
       offset,
-      attributes: [ 'username', 'nickname', 'avatar', 'role', 'created_at', 'updated_at' ],
-    });
-  };
-  UserModel.findUserByID = async function(userID) {
+      attributes: ['username', 'nickname', 'avatar', 'role', 'created_at', 'updated_at'],
+    })
+  }
+
+  UserModel.findUserByID = async function (userID) {
     return await this.findOne({
       where: {
         id: userID,
       },
-    });
-  };
-  UserModel.associate = function() {
-    UserModel.hasOne(app.model.LiveModel);
-  };
-  return UserModel;
-};
+    })
+  }
+
+  UserModel.associate = function () {
+    UserModel.hasOne(app.model.LiveModel)
+    UserModel.hasMany(app.model.GiftModel,{
+      foreignKey:'get_gift_user_id'
+    })
+    UserModel.hasMany(app.model.GiftModel,{
+      foreignKey:'send_gift_user_id'
+    })
+    UserModel.hasOne(app.model.GiftGroupModel)
+  }
+  return UserModel
+}
