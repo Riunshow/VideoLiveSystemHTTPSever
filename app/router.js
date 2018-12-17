@@ -18,6 +18,8 @@ module.exports = app => {
 
   const isStreamer = app.role.can('streamer');
 
+  // 用户相关接口
+  router.post('/api/user/smscode', controller.api.userController.getSmsCode);
 
   router.post('/api/user/register', controller.api.userController.register);
 

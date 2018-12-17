@@ -5,6 +5,18 @@
       "POST"
     ],
     "paramNames": [],
+    "path": "/api/user/smscode",
+    "regexp": "/^\\/api\\/user\\/smscode(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
     "path": "/api/user/register",
     "regexp": "/^\\/api\\/user\\/register(?:\\/(?=$))?$/",
     "stack": [

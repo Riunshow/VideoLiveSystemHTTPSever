@@ -35,7 +35,7 @@ class UserService extends Service {
     const user =  await this.UserModel.findUser(username) || null;
     
     if (user && await this.ctx.compare(password, user.get('password'))) {
-      console.log('user service login: '， user.get('id'))
+      console.log('user service login: ', user.get('id'))
 
       const role = user.get('role');
 

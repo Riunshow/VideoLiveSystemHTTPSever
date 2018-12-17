@@ -23,6 +23,10 @@ exports.bcrypt = {
 exports.userrole = {
   package: 'egg-userrole',
 };
+exports.redis = {
+  enable: true,
+  package: 'egg-redis',
+};
 // exports.passport = {
 //   enable:true,
 //   package:'egg-passport'

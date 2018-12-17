@@ -38,7 +38,7 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
-      price: {
+      balance: {
         type: INTEGER(20),
         allowNull: false,
         defaultValue: 0,

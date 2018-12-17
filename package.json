@@ -9,6 +9,7 @@
     "egg-bcrypt": "^1.1.0",
     "egg-cors": "^2.0.0",
     "egg-passport": "^2.0.1",
+    "egg-redis": "^2.2.0",
     "egg-scripts": "^2.5.0",
     "egg-sequelize": "^3.1.2",
     "egg-socket.io": "^4.0.7",
@@ -19,7 +20,9 @@
     "eslint": "^4.19.1",
     "eslint-config-egg": "^6.0.0",
     "ms": "^2.1.1",
-    "mysql2": "^1.5.3"
+    "mysql2": "^1.5.3",
+    "nodemailer": "^4.7.0",
+    "qcloudsms_js": "^0.1.1"
   },
   "devDependencies": {
     "autod": "^3.0.1",

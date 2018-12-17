@@ -24,32 +24,18 @@ module.exports = appInfo => {
         },
       },
     },
-    // view:{
-    //   root: path.join(appInfo.baseDir, 'app/view'),
-    //   mapping: {
-    //     '.html': 'html',
-    //   },
-    // },
-    // assets:{
-    //   publicPath: '/public/',
-    //   devServer: {
-    //     debug: true,
-    //     command: 'vue serve',
-    //     cwd:path.join(appInfo.baseDir, 'app/assets/src'),
-    //     port: 8000,
-    //     env: {
-    //       BROWSER: 'none',
-    //       ESLINT: 'none',
-    //       SOCKET_SERVER: 'http://127.0.0.1:8080',
-    //       PUBLIC_PATH: 'http://127.0.0.1:8080',
-    //     },
-    //   },
-    // },
+    redis: {
+      client: {
+        port: 6379,          // Redis port
+        host: '127.0.0.1',   // Redis host
+        password: '123456',
+        db: 0,
+      },
+    },
     security: {
       csrf: {
         enable: false,
       },
-
     },
     cors: {
       origin: '*',

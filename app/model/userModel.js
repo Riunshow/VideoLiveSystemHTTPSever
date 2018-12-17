@@ -44,7 +44,7 @@ module.exports = app => {
       allowNull: false,
       defaultValue: 0, // -1为封禁用户,0为普通用户,1为主播,2为管理员
     },
-    price: {
+    balance: {
       type: INTEGER(20),
       allowNull: false,
       defaultValue: 0,

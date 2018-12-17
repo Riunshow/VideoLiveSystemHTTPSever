@@ -2,7 +2,8 @@
 
 module.exports = app => {
 	const {
-		INTEGER
+		INTEGER,
+		STRING
 	} = app.Sequelize
 
 	const GiftGroupModel = app.model.define('giftGroup', {
