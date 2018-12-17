@@ -22,10 +22,10 @@ describe('test/controller/api/user.test.js', () => {
     beforeEach(async function() {
       app.mockService('userService', 'login', async function(username, password) {
         const testUser = {
-          username: 'sansroman@foxmail.com',
+          username: 'Rainbower',
           password: await ctx.genHash('password@1'),
           avatar: 'www.baidu.com',
-          nickname: 'sansroman',
+          nickname: 'Rainbower',
           role: 0,
         };
 
@@ -52,7 +52,7 @@ describe('test/controller/api/user.test.js', () => {
       return app.httpRequest()
         .post('/api/user/login')
         .send({
-          username: 'sansroman',
+          username: 'Rainbower',
           password: 'password1',
         })
         .set('Accept', 'application/json')
@@ -64,7 +64,7 @@ describe('test/controller/api/user.test.js', () => {
       await app.httpRequest()
         .post('/api/user/login')
         .send({
-          username: 'sansroman@foxmail.com',
+          username: 'Rainbower',
           password: 'password123',
         })
         .set('Accept', 'application/json')
@@ -76,7 +76,7 @@ describe('test/controller/api/user.test.js', () => {
       await app.httpRequest()
         .post('/api/user/login')
         .send({
-          username: 'sansroman@foxmail.com',
+          username: 'Rainbower',
           password: 'password@1',
           rememberMe: true,
         })

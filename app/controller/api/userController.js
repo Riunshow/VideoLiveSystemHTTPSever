@@ -18,16 +18,16 @@ class UserController extends Controller {
   // 登录
   async login() {
     this.ctx.validate({
-      username: { type: 'email' },
+      useraccount: { type: 'email' },
       password: { type: 'string', min: 1, max: 20 },
       rememberMe: { type: 'boolean', required: false },
     })
     const {
-      username,
+      useraccount,
       password,
       rememberMe,
     } = this.ctx.request.body
-    const response = await this.userService.login(username, password)
+    const response = await this.userService.login(useraccount, password)
     // if (response.error) this.ctx.status = 403
     if (!response.error && rememberMe) this.ctx.session.maxAge = ms('30d')
 
@@ -37,31 +37,40 @@ class UserController extends Controller {
   // 注册
   async register() {
     this.ctx.validate({
-      username: { type: 'string' },
+      useraccount: { type: 'string' },
       password: { type: 'string', min: 1, max: 20 },
       nickname: { type: 'string', min: 1, max: 20, required: false },
       avatar: { type: 'url', required: false },
     })
     const {
-      username,
+      useraccount,
       password,
       nickname = 'guest',
       avatar = null,
+      smscode
     } = this.ctx.request.body
-    const response = await this.userService.register(username, password, nickname, avatar)
-    if (response.error) this.ctx.status = 409
+
+    let response = null;
+
+    if (smscode == await this.app.redis.get(useraccount)) {
+      response = await this.userService.register(useraccount, password, nickname, avatar) 
+    }else {
+      response = {
+        success: false,
+        msg: '验证码错误'
+      }
+    }
+    // if (response.error) this.ctx.status = 409
     this.ctx.body = response
   }
 
   // 获取短信验证码
   async getSmsCode() {
     const { phoneNum } = this.ctx.request.body
-    console.log('phoneNum: ', phoneNum)
 
     const params = [rand(1000, 9999), '登录', 5]
 
     const paramsRedis = await this.app.redis.get(phoneNum)
-    console.log('redis: ', paramsRedis)
 
     let response = {}
 

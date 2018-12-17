@@ -9,7 +9,7 @@ module.exports = app => {
   /**
    * @desc user 用户表
    * id: id
-   * username: 登录账户
+   * useraccount: 登录账户名 手机号
    * nickname: 用户昵称
    * password: 用户密码
    * avatar: 用户头像
@@ -22,7 +22,7 @@ module.exports = app => {
       primaryKey: true,
       autoIncrement: true,
     },
-    username: {
+    useraccount: {
       type: STRING(50),
       allowNull: false,
     },
@@ -55,10 +55,10 @@ module.exports = app => {
     freezeTableName: true,
   })
 
-  UserModel.findUser = async function (username) {
+  UserModel.findUser = async function (useraccount) {
     return await this.findOne({
       where: {
-        username,
+        useraccount,
       },
     })
   }
@@ -67,7 +67,7 @@ module.exports = app => {
     return await this.findAll({
       limit,
       offset,
-      attributes: ['username', 'nickname', 'avatar', 'role', 'created_at', 'updated_at'],
+      attributes: ['useraccount', 'nickname', 'avatar', 'role', 'created_at', 'updated_at'],
     })
   }
 

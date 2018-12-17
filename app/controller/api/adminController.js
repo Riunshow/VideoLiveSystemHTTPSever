@@ -10,15 +10,15 @@ class AdminController extends Controller {
   }
   // async login() {
   //     this.ctx.validate({
-  //       username:{type: 'email'},
+  //       useraccount:{type: 'email'},
   //       password:{type: 'string',min:8,max:20},
   //       rememberMe:{type: 'boolean',required:false},
   //     })
   //   const {
-  //     username,
+  //     useraccount,
   //     password
   //   } = this.ctx.request.body;
-  //   const response = await this.userService.login(username, password);
+  //   const response = await this.userService.login(useraccount, password);
   //   if(response.error) this.ctx.status = 403;
   //   this.ctx.body = response;
 

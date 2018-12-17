@@ -8,11 +8,11 @@ class UserService extends Service {
     this.ctx = ctx;
     this.UserModel = ctx.model.UserModel;
   }
-  async register(username, password, nickname, avatar) {
+  async register(useraccount, password, nickname, avatar) {
     const pwdHash = await this.ctx.genHash(password);
     const result = await this.UserModel.findOrCreate({
       where: {
-        username,
+        useraccount,
       },
       defaults: {
         password: pwdHash,
@@ -31,8 +31,8 @@ class UserService extends Service {
       data: '已存在此用户',
     };
   }
-  async login(username, password) {
-    const user =  await this.UserModel.findUser(username) || null;
+  async login(useraccount, password) {
+    const user =  await this.UserModel.findUser(useraccount) || null;
     
     if (user && await this.ctx.compare(password, user.get('password'))) {
       console.log('user service login: ', user.get('id'))

@@ -16,7 +16,7 @@ module.exports = {
         primaryKey: true,
         autoIncrement: true,
       },
-      username: {
+      useraccount: {
         type: STRING(50),
         allowNull: false,
       },
