@@ -90,6 +90,16 @@ module.exports = {
         allowNull: false,
         defaultValue: 0,
       },
+      Attendance: {
+        type: INTEGER(11),
+        allowNull: false,
+        deafultValue: 0
+      },
+      hot: {
+        type: INTEGER(11),
+        allowNull: false,
+        deafultValue: 0
+      },
       user_id: {
         type: INTEGER(20),
         allowNull: false,

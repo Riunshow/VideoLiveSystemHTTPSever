@@ -22,13 +22,13 @@ class UserService extends Service {
     });
     if (result[result.length - 1]) {
       return {
-        error: false,
-        data: '创建成功',
+        success: true,
+        msg: '创建成功',
       };
     }
     return {
-      error: true,
-      data: '已存在此用户',
+      success: false,
+      msg: '已存在此用户',
     };
   }
   async login(useraccount, password) {
@@ -46,9 +46,9 @@ class UserService extends Service {
       };
 
       return {
-        error: false,
+        success: true,
+        msg: '登录成功',
         data: {
-          text: '登录成功',
           user: {
             nickname: user.get('nickname'),
             avatar: user.get('avatar'),
@@ -58,8 +58,8 @@ class UserService extends Service {
       };
     }
     return {
-      error: true,
-      data: '用户名或密码错误',
+      success: false,
+      msg: '用户名或密码错误',
     };
   }
   async modifyInfo(userID, nickname, avatar) {

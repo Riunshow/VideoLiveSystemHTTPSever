@@ -18,14 +18,14 @@ class UserController extends Controller {
   // 登录
   async login() {
     this.ctx.validate({
-      useraccount: { type: 'email' },
+      useraccount: { type: 'string' },
       password: { type: 'string', min: 1, max: 20 },
       rememberMe: { type: 'boolean', required: false },
     })
     const {
       useraccount,
       password,
-      rememberMe,
+      rememberMe = false,
     } = this.ctx.request.body
     const response = await this.userService.login(useraccount, password)
     // if (response.error) this.ctx.status = 403
@@ -71,10 +71,19 @@ class UserController extends Controller {
     const params = [rand(1000, 9999), '登录', 5]
 
     const paramsRedis = await this.app.redis.get(phoneNum)
+    let redisTTL = 99999
+    await this.app.redis.ttl(phoneNum, (err, res) => {
+      if (err) {
+        console.log("err: ", err)
+      } else {
+        console.log(res)
+        redisTTL = res
+      }
+    })
 
     let response = {}
 
-    if (paramsRedis) {
+    if (paramsRedis && redisTTL > 241) {
       response = {
         success: false,
         msg: '请勿重复获取验证码。'
@@ -94,12 +103,11 @@ class UserController extends Controller {
 
       await this.app.redis.set(phoneNum, params[0])
       
-      // 过期时间 300秒 5分钟
+      // 过期时间 秒
       await this.app.redis.expire(phoneNum, 300)
 
       response = {
         success: true,
-        code: params[0],
         msg: '验证码获取成功。'
       }
     }
@@ -110,7 +118,10 @@ class UserController extends Controller {
 
   async logout() {
     this.ctx.session = null
-    this.ctx.body = '退出成功'
+    this.ctx.body = {
+      success: true,
+      msg: '退出成功'
+    }
   }
 
   async modifyInfo() {
