@@ -81,13 +81,13 @@ module.exports = app => {
 
   UserModel.associate = function () {
     UserModel.hasOne(app.model.LiveModel)
-    UserModel.hasMany(app.model.GiftModel,{
-      foreignKey:'get_gift_user_id'
-    })
-    UserModel.hasMany(app.model.GiftModel,{
-      foreignKey:'send_gift_user_id'
-    })
     UserModel.hasOne(app.model.GiftGroupModel)
+    UserModel.hasMany(app.model.GiftRecordModel, {
+      foreignKey: 'get_gift_user_id'
+    })
+    UserModel.hasMany(app.model.GiftRecordModel, {
+      foreignKey: 'send_gift_user_id'
+		})
   }
   return UserModel
 }

@@ -39,16 +39,18 @@ module.exports = app => {
   })
 	
   GiftModel.associate = function() {
-		GiftModel.belongsTo(app.model.UserModel, {
-      foreignKey: 'get_gift_user_id'
-		})
-		GiftModel.belongsTo(app.model.UserModel, {
-      foreignKey: 'send_gift_user_id'
-    })
 		GiftModel.belongsTo(
 			app.model.GiftGroupModel, 
 			{
 				foreignKey: 'gift_group_id',
+				onDelete: 'cascade'
+			}
+    )
+    
+    GiftModel.belongsTo(
+			app.model.GiftRecordModel, 
+			{
+				foreignKey: 'gift_record_id',
 				onDelete: 'cascade'
 			}
 		)

@@ -144,6 +144,34 @@ module.exports = {
       updated_at: DATE,
     })
 
+    // gift record
+    await queryInterface.createTable('giftRecord', {
+      giftRecordId: {
+        type: INTEGER(20),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      get_gift_user_id: {
+        type: INTEGER(20),
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id'
+        },
+      },
+      send_gift_user_id: {
+        type: INTEGER(20),
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id'
+        },
+      },
+      created_at: DATE,
+      updated_at: DATE
+    })
+
     // gift
     await queryInterface.createTable('gift', {
       giftId: {
@@ -172,26 +200,21 @@ module.exports = {
           key: 'giftGroupId'
         },
       },
-      get_gift_user_id: {
+      gift_record_id: {
         type: INTEGER(20),
         allowNull: false,
         references: {
-          model: 'user',
-          key: 'id'
-        },
-      },
-      send_gift_user_id: {
-        type: INTEGER(20),
-        allowNull: false,
-        references: {
-          model: 'user',
-          key: 'id'
+          model: 'giftRecord',
+          key: 'giftRecordId'
         },
       },
       created_at: DATE,
       updated_at: DATE
     })
+
+
   },
+
 
   async down(queryInterface) {
     await queryInterface.dropTable('live')
