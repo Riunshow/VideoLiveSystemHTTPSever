@@ -115,7 +115,7 @@ class UserController extends Controller {
     this.ctx.body = response
   }
 
-
+  // 退出
   async logout() {
     this.ctx.session = null
     this.ctx.body = {

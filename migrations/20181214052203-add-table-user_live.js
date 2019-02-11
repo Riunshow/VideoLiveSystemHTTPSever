@@ -212,6 +212,46 @@ module.exports = {
       updated_at: DATE
     })
 
+    // statistic
+    await queryInterface.createTable('statistic', {
+      statisticId: {
+        type: INTEGER(20),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      userCount: {
+        type: INTEGER(20),
+        allowNull: false,
+      },
+      todayVisit: {
+        type: INTEGER(20),
+        allowNull: false,
+      },
+      liveCount: {
+        type: INTEGER(20),
+        allowNull: false,
+      },
+      created_at: DATE,
+      updated_at: DATE
+    })
+
+    // todayVisit
+    await queryInterface.createTable('todayVisit', {
+      todayVisitId: {
+        type: INTEGER(20),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      userIp: {
+        type: STRING(200),
+        allowNull: false,
+        defaultValue: '',
+      },
+      created_at: DATE,
+      updated_at: DATE
+    })
 
   },
 
@@ -222,7 +262,11 @@ module.exports = {
     
     await queryInterface.dropTable('gift')
     await queryInterface.dropTable('giftGroup')
+    await queryInterface.dropTable('giftRecord')
 
     await queryInterface.dropTable('user')
+
+    await queryInterface.dropTable('statistic')
+    await queryInterface.dropTable('todayVisit')
   },
 }
