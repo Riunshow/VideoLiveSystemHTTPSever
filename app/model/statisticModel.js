@@ -30,7 +30,7 @@ module.exports = app => {
 		liveCount: {
 			type: INTEGER(20),
       allowNull: false,
-		},
+		}
 	}, {
 		createAt: 'created_at',
 		updateAt: 'updated_at',

@@ -13,16 +13,22 @@ class HomeService extends Service {
 	}
 	
 	// 各种统计
-	async getCount() {
+	async getCount(minDate, maxDate) {
 		const result = await this.StatisticModel.findAll({
-			where: {}
+			where: {
+				created_at: {
+					$gt: minDate,
+					$lte: maxDate
+				},
+			},
+			order: [['created_at', 'ASC']]
 		})
 
 		return {
 			success: true,
 			msg: '查询成功',
 			data: result
-		}
+		}	
 	}
 
 	// 统计今日人数

@@ -19,7 +19,7 @@ module.exports = app => {
   const isStreamer = app.role.can('streamer')
 
   // 统计相关接口
-  router.get('/api/home/count', controller.api.homeController.getAllCount)
+  router.post('/api/home/count', controller.api.homeController.getAllCount)
   
   router.get('/api/home/todayVisit', controller.api.homeController.getTodayVisit)
 
