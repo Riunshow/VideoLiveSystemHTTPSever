@@ -67,7 +67,7 @@ module.exports = app => {
     return await this.findAll({
       limit,
       offset,
-      attributes: ['useraccount', 'nickname', 'avatar', 'role', 'created_at', 'updated_at'],
+      attributes: ['id', 'useraccount', 'nickname', 'avatar', 'role', 'balance', 'created_at', 'updated_at'],
     })
   }
 

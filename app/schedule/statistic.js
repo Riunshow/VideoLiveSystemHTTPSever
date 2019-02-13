@@ -14,8 +14,8 @@ cron
 
 module.exports = {
 	schedule: {
-		// cron: '0 0 0 * * *',
-		interval: '5min',
+		cron: '0 0 */1 * * *',
+		// interval: '10s',
 		type: 'all',
 	},
 	async task(ctx) {

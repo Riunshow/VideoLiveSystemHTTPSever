@@ -8,30 +8,19 @@ class AdminController extends Controller {
     this.userService = ctx.service.userService;
     this.adminService = ctx.service.adminService;
   }
-  // async login() {
-  //     this.ctx.validate({
-  //       useraccount:{type: 'email'},
-  //       password:{type: 'string',min:8,max:20},
-  //       rememberMe:{type: 'boolean',required:false},
-  //     })
-  //   const {
-  //     useraccount,
-  //     password
-  //   } = this.ctx.request.body;
-  //   const response = await this.userService.login(useraccount, password);
-  //   if(response.error) this.ctx.status = 403;
-  //   this.ctx.body = response;
 
-  // }
-  // async logout() {
-  //   this.ctx.session = null;
-  //   this.ctx.body = "退出成功"
-  // }
+  // 获取
+  async getUserById() {
+    const { userId } = this.ctx.request.body
+    const response = await this.adminService.getUserById(userId)
+    this.ctx.body = response
+  }
 
+  // 获取用户列表
   async getUserList() {
-    const { limit = 10, offset = 0 } = this.ctx.request.query;
-    const response = await this.adminService.getUserList(limit, offset);
-    this.ctx.body = response;
+    const { limit = 10, offset = 0 } = this.ctx.request.query
+    const response = await this.adminService.getUserList(limit, parseInt(offset))
+    this.ctx.body = response
   }
 
   async getRoomList() {

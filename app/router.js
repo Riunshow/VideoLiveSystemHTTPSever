@@ -38,6 +38,8 @@ module.exports = app => {
 
   router.put('/api/user/modifyInfo', logged, controller.api.userController.modifyInfo)
 
+  router.post('/api/admin/userById', isAdmin, controller.api.adminController.getUserById)
+
   router.get('/api/admin/userList', isAdmin, controller.api.adminController.getUserList)
 
   router.get('/api/admin/roomList', isAdmin, controller.api.adminController.getRoomList)

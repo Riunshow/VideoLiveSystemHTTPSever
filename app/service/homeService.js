@@ -60,20 +60,29 @@ class HomeService extends Service {
 		}
 	}
 
-	// 清空今日人数统计表
-	async clearTodayVisit() {
-		await this.TodayVisitModel.destroy({
-			where: {},
-			truncate: true
-		})
-	}
-
 	// 同步数据到统计表中
 	async syncDataToDB() {
+		Date.prototype.getMonthFormatted = function() {
+			const month = this.getMonth() + 1
+			return month < 10 ? '0' + month : '' + month
+		}
+		Date.prototype.getDateFormatted = function() {
+			const date = this.getDate()
+			return date < 10 ? '0' + date : '' + date
+		}
+
 		const userCount = await this.UserModel.count()
 		const liveCount = await this.LiveModel.count()
-		const todayVisit = await this.TodayVisitModel.count()
+		const todayVisitList = await this.TodayVisitModel.findAll({
+			where: {
+				updated_at: {
+					$gt: `${new Date().getFullYear()}-${new Date().getMonthFormatted()}-${new Date().getDateFormatted()}`,
+					$lte: new Date()
+				},
+			}
+		})
 
+		const todayVisit = todayVisitList.length
 		const result = await this.StatisticModel.create({
 			userCount,
 			todayVisit,

@@ -1,18 +1,36 @@
-'use strict';
+'use strict'
 
-const Service = require('egg').Service;
+const Service = require('egg').Service
 
 class AdminService extends Service {
   constructor(ctx) {
-    super(ctx);
-    this.UserModel = ctx.model.UserModel;
-    this.LiveModel = ctx.model.LiveModel;
-
+    super(ctx)
+    this.UserModel = ctx.model.UserModel
+    this.LiveModel = ctx.model.LiveModel
   }
 
+  // 获取用户列表 分页
   async getUserList(limit, offset) {
-    const data = await this.UserModel.getAllUser(limit, offset);
-    return { error: false, data };
+    const data = await this.UserModel.getAllUser(limit, offset*limit)
+    const count = await this.UserModel.count()
+
+    return { 
+      success: true,
+      msg: '查询用户列表成功', 
+      data,
+      count
+    }
+  }
+
+  // 根据id获取单个用户
+  async getUserById(id) {
+    const data = await this.UserModel.findUserByID(id)
+
+    return {
+      success: true,
+      msg: `查询 id=${id} 用户成功`,
+      data
+    }
   }
 
   async getRoomList(limit, offset) {

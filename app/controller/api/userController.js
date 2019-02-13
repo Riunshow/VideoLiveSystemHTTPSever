@@ -47,7 +47,6 @@ class UserController extends Controller {
       password,
       nickname = 'guest',
       avatar = null,
-      smscode
     } = this.ctx.request.body
 
     let response = null;
