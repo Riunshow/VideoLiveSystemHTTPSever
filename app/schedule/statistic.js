@@ -14,7 +14,7 @@ cron
 
 module.exports = {
 	schedule: {
-		cron: '0 0 */1 * * *',
+		cron: '0 0 * * * *',
 		// interval: '10s',
 		type: 'all',
 	},

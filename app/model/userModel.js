@@ -42,7 +42,7 @@ module.exports = app => {
     role: {
       type: INTEGER(3),
       allowNull: false,
-      defaultValue: 0, // -1为封禁用户,0为普通用户,1为主播,2为管理员
+      defaultValue: 0, // -1为封禁用户,1为普通用户,2为主播,3为管理员
     },
     balance: {
       type: INTEGER(20),
@@ -76,6 +76,39 @@ module.exports = app => {
       where: {
         id: userID,
       },
+    })
+  }
+
+  UserModel.findAllUserByRole = async function (limit, offset, role) {
+    return await this.findAll({
+      where: {
+        role
+      },
+      limit,
+      offset,
+      attributes: ['id', 'useraccount', 'nickname', 'avatar', 'role', 'balance', 'created_at', 'updated_at'],
+    })
+  }
+
+  UserModel.findAllUserByNicknameOrAccount = async function (limit, offset, nickname, useraccount) {
+    return await this.findAll({
+      where: {
+        $or: [
+          {
+            nickname: {
+              $like: `%${nickname}%`
+            }
+          },
+          {
+            useraccount: {
+              $like: `%${useraccount}%`
+            }
+          }
+        ]
+      },
+      limit,
+      offset,
+      attributes: ['id', 'useraccount', 'nickname', 'avatar', 'role', 'balance', 'created_at', 'updated_at'],
     })
   }
 

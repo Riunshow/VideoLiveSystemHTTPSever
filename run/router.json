@@ -115,19 +115,6 @@
   {
     "name": null,
     "methods": [
-      "POST"
-    ],
-    "paramNames": [],
-    "path": "/api/admin/userById",
-    "regexp": "/^\\/api\\/admin\\/userById(?:\\/(?=$))?$/",
-    "stack": [
-      "anonymous",
-      "wrappedController"
-    ]
-  },
-  {
-    "name": null,
-    "methods": [
       "HEAD",
       "GET"
     ],
@@ -142,12 +129,37 @@
   {
     "name": null,
     "methods": [
-      "HEAD",
-      "GET"
+      "POST"
     ],
     "paramNames": [],
-    "path": "/api/admin/roomList",
-    "regexp": "/^\\/api\\/admin\\/roomList(?:\\/(?=$))?$/",
+    "path": "/api/admin/userById",
+    "regexp": "/^\\/api\\/admin\\/userById(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/userByRole",
+    "regexp": "/^\\/api\\/admin\\/userByRole(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/userByNickname",
+    "regexp": "/^\\/api\\/admin\\/userByNickname(?:\\/(?=$))?$/",
     "stack": [
       "anonymous",
       "wrappedController"
@@ -161,6 +173,46 @@
     "paramNames": [],
     "path": "/api/admin/changeUserRole",
     "regexp": "/^\\/api\\/admin\\/changeUserRole(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "DELETE"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/deleteUserById",
+    "regexp": "/^\\/api\\/admin\\/deleteUserById(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "PUT"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/updateUserById",
+    "regexp": "/^\\/api\\/admin\\/updateUserById(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/roomList",
+    "regexp": "/^\\/api\\/admin\\/roomList(?:\\/(?=$))?$/",
     "stack": [
       "anonymous",
       "wrappedController"

@@ -44,8 +44,8 @@ class UserService extends Service {
 
       this.ctx.session.user = {
         userID: user.get('id'),
-        isStreamer: role === 1,
-        isAdmin: role === 2,
+        isStreamer: role === 2,
+        isAdmin: role === 3,
       }
 
       return {
@@ -56,6 +56,7 @@ class UserService extends Service {
             nickname: user.get('nickname'),
             avatar: user.get('avatar'),
             role,
+            id: user.get('id')
           },
         },
       }
