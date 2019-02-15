@@ -19,10 +19,8 @@ class LiveService extends Service {
     const status = data === null ? -1 : data.get('status');
     return status;
   }
-
-
+  
   async getLiveList(offset, limit) {
-
     const data = await this.LiveModel.findAll({
       where: {
         status: 1,
@@ -32,6 +30,8 @@ class LiveService extends Service {
     });
     return data;
   }
+
+
   async startLiveStream(roomID) {
     const status = await this._checkRoomStatus(roomID);
     let message = status === 1 ? '直播间已启动' : '无此直播间';
