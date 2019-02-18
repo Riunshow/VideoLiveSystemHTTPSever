@@ -2,6 +2,19 @@
   {
     "name": null,
     "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/common/uploadToken",
+    "regexp": "/^\\/api\\/common\\/uploadToken(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
       "POST"
     ],
     "paramNames": [],
@@ -226,6 +239,33 @@
     "paramNames": [],
     "path": "/api/admin/changeRoomStatus",
     "regexp": "/^\\/api\\/admin\\/changeRoomStatus(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/getLiveGroupList",
+    "regexp": "/^\\/api\\/admin\\/getLiveGroupList(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/addNewLiveGroup",
+    "regexp": "/^\\/api\\/admin\\/addNewLiveGroup(?:\\/(?=$))?$/",
     "stack": [
       "anonymous",
       "wrappedController"

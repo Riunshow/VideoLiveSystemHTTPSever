@@ -33,6 +33,13 @@ module.exports = app => {
     freezeTableName: true,
   })
 
+  LiveGroupModel.getAllCate = async function (limit, offset) {
+    return await this.findAll({
+      limit,
+      offset
+    })
+  }
+
   LiveGroupModel.associate = function() {
     LiveGroupModel.hasMany(
 			app.model.LiveModel, 

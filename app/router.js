@@ -18,6 +18,9 @@ module.exports = app => {
 
   const isStreamer = app.role.can('streamer')
 
+  // -------- 公共接口
+  router.get('/api/common/uploadToken', controller.api.commonController.generateSignature)
+
   // -------- 统计相关接口
 
   // 获取全部统计
@@ -75,7 +78,14 @@ module.exports = app => {
   io.of('/').route('msg', io.controller.index.message)
 
 
-  // 直播相关接口
+  // ----------------   直播相关接口
+
+  // 获取直播分类信息
+  router.get('/api/admin/getLiveGroupList', isAdmin, controller.api.liveGroupController.getLiveGroupList)
+  
+  // 添加一个新分类
+  router.post('/api/admin/addNewLiveGroup', isAdmin, controller.api.liveGroupController.addNewLiveGroup)
+
   router.get('/api/live', controller.api.liveController.getLiveList)
 
   router.get('/api/live/start/:roomID', controller.api.liveController.startLiveStream)

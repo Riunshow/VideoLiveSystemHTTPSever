@@ -55,8 +55,8 @@ class AdminController extends Controller {
 
   // 修改用户信息
   async updateUserById() {
-    const { userID, nickname, avatar } = this.ctx.request.body
-    const response = await this.adminService.modifyInfo(userID, nickname, avatar)
+    const { userId, nickname, avatar } = this.ctx.request.body
+    const response = await this.adminService.modifyInfo(parseInt(userId), nickname, avatar)
     this.ctx.body = response
   }
 
