@@ -11,7 +11,7 @@ module.exports = app => {
    * roomID: 房间id
    * cover: 房间封面图片
    * title: 房间标题
-   * status: 房间状态
+   * status: 房间状态  1 开启 0 关闭
    * Attendance: 观众人数
    * hot: 热度
    */

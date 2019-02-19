@@ -8,6 +8,14 @@ class LiveController extends Controller {
     this.session = this.ctx.session
     this.live = ctx.service.liveService;
   }
+
+  // 根据分类id查询详细信息
+  async getInfoByGroupId() {
+    const { live_group_id } = this.ctx.request.body
+    const response = await this.live.getInfoByGroupId(live_group_id)
+    this.ctx.body = response
+  }
+
   async getLiveList() {
     const { offset, limit } = this.ctx.params;
     const response = await this.live.getLiveList(offset, limit);

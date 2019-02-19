@@ -86,6 +86,9 @@ module.exports = app => {
   // 添加一个新分类
   router.post('/api/admin/addNewLiveGroup', isAdmin, controller.api.liveGroupController.addNewLiveGroup)
 
+  // 获取直播分类信息详情
+  router.post('/api/admin/getInfoByGroupId', isAdmin, controller.api.liveController.getInfoByGroupId)
+
   router.get('/api/live', controller.api.liveController.getLiveList)
 
   router.get('/api/live/start/:roomID', controller.api.liveController.startLiveStream)

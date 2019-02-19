@@ -10,6 +10,22 @@ class LiveService extends Service {
 
     this.nsp = ctx.app.io.of('/');
   }
+
+  // 根据 live_gourp_id 查询所有的直播间
+  async getInfoByGroupId(live_group_id) {
+    const data = await this.LiveModel.findAll({
+      where: {
+        live_group_id,
+      }
+    })
+
+    return {
+      success: true,
+      msg: '查询分类内信息成功',
+      data
+    }
+  }
+
   async _checkRoomStatus(roomID) {
     const data = await this.LiveModel.findOne({
       where: {

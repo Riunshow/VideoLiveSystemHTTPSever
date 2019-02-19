@@ -12,23 +12,18 @@ class LiveService extends Service {
 	// 获取所有分类信息
 	async getLiveGroupList(limit, offset) {
 		// const data = await this.LiveGroupModel.getAllCate(limit, offset*limit)
+
 		const data = await this.LiveGroupModel.findAll({
-      limit,
-      offset
+			include: [{
+				model: this.LiveModel,
+				required: false 
+			}]
 		})
 
-		// data.map((x) => {
-		// 	x.peopleCount = this.LiveModel.count({
-		// 		where: {
-		// 			live_group_id: x.liveGroupId
-		// 		}
-		// 	})
-		// })
-		
-    return {
+		return {
 			success: true,
 			msg: '查找全部直播分类成功',
-			data,
+			data
 		}
 	}
 	
