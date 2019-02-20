@@ -89,6 +89,12 @@ module.exports = app => {
   // 获取直播分类信息详情
   router.post('/api/admin/getInfoByGroupId', isAdmin, controller.api.liveController.getInfoByGroupId)
 
+  // 获取直播分类信息详情 根据房间人数排序
+  router.post('/api/admin/getInfoByGroupIdDESC', isAdmin, controller.api.liveController.getInfoByGroupIdDESC)
+
+  // 直播分类信息详情 模糊搜索 主播名或房间名
+  router.post('/api/admin/findLiveInfoByName', isAdmin, controller.api.liveController.findLiveInfoByName)
+
   router.get('/api/live', controller.api.liveController.getLiveList)
 
   router.get('/api/live/start/:roomID', controller.api.liveController.startLiveStream)

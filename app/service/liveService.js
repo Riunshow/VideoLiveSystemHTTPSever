@@ -16,7 +16,11 @@ class LiveService extends Service {
     const data = await this.LiveModel.findAll({
       where: {
         live_group_id,
-      }
+      },
+      include: [{
+				model: this.UserModel,
+				required: false 
+			}]
     })
 
     return {
@@ -25,6 +29,67 @@ class LiveService extends Service {
       data
     }
   }
+
+   // 根据 live_gourp_id 查询所有的直播间 根据房间人数排序
+   async getInfoByGroupIdDESC(live_group_id) {
+    const data = await this.LiveModel.findAll({
+      where: {
+        live_group_id,
+      },
+      order: [['Attendance', 'DESC']],
+      include: [{
+				model: this.UserModel,
+				required: false 
+			}]
+    })
+
+    return {
+      success: true,
+      msg: '查询分类内信息根据房间人数降序成功',
+      data
+    }
+   }
+
+  // 模糊查询主播名或房间名
+  async findLiveInfoByName(name, live_group_id) {
+    const user_id_save = []
+    const user_data = await this.UserModel.findAll({
+      where: {
+        nickname: {
+          $like: `%${name}%`
+        }
+      }
+    })
+    user_data.forEach(x => user_id_save.push(x.id))
+    const data = await this.LiveModel.findAll({
+      where: {
+        $or: [
+          {
+            title: {
+              $like: `%${name}%`
+            }
+          },
+          {
+            user_id: user_id_save
+          }
+        ],
+        live_group_id
+      },
+      include: [{
+        model: this.UserModel,
+        required: false 
+      }]
+    })
+
+    return {
+      success: true,
+      msg: '搜索成功',
+      data
+    }
+  }
+
+  // 
+  
 
   async _checkRoomStatus(roomID) {
     const data = await this.LiveModel.findOne({

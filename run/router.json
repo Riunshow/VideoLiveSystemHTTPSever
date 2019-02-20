@@ -287,6 +287,32 @@
   {
     "name": null,
     "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/getInfoByGroupIdDESC",
+    "regexp": "/^\\/api\\/admin\\/getInfoByGroupIdDESC(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/admin/findLiveInfoByName",
+    "regexp": "/^\\/api\\/admin\\/findLiveInfoByName(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
       "HEAD",
       "GET"
     ],
