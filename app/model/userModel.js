@@ -13,7 +13,7 @@ module.exports = app => {
    * nickname: 用户昵称
    * password: 用户密码
    * avatar: 用户头像
-   * role: 用户权限
+   * role: 用户权限  -1为封禁用户,1为普通用户,2为主播,3为管理员
    */
   const UserModel = app.model.define('user', {
     id: {
