@@ -38,8 +38,6 @@ class UserService extends Service {
     const user =  await this.UserModel.findUser(useraccount) || null
     
     if (user && await this.ctx.compare(password, user.get('password'))) {
-      console.log('user service login: ', user.get('id'))
-
       const role = user.get('role')
 
       this.ctx.session.user = {
@@ -56,7 +54,8 @@ class UserService extends Service {
             nickname: user.get('nickname'),
             avatar: user.get('avatar'),
             role,
-            id: user.get('id')
+            id: user.get('id'),
+            balance: user.get('balance')
           },
         },
       }
