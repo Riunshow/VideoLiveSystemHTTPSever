@@ -31,13 +31,22 @@ class LiveController extends Controller {
     this.ctx.body = response
   }
 
+  // 获取所有直播列表
   async getLiveList() {
-    const { offset, limit } = this.ctx.params;
-    const response = await this.live.getLiveList(offset, limit);
-    this.ctx.body = response;
+    const { offset, limit } = this.ctx.params
+    const response = await this.live.getLiveList(offset, limit)
+    this.ctx.body = response
   }
+
+  // 根据房间id获取房间信息
+  async getLiveInfoByRoomId() {
+    const { roomId } = this.ctx.request.body
+    const response = await this.live.getLiveInfoByRoomId(roomId)
+    this.ctx.body = response
+  }
+
   async startLiveStream() {
-    const { roomID } = this.ctx.params;
+    const { roomID } = this.ctx.params
     const response = await this.live.startLiveStream(roomID);
     this.ctx.body = response;
   }

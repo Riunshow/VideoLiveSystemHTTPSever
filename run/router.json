@@ -254,7 +254,6 @@
     "path": "/api/admin/getLiveGroupList",
     "regexp": "/^\\/api\\/admin\\/getLiveGroupList(?:\\/(?=$))?$/",
     "stack": [
-      "anonymous",
       "wrappedController"
     ]
   },
@@ -280,7 +279,6 @@
     "path": "/api/admin/getInfoByGroupId",
     "regexp": "/^\\/api\\/admin\\/getInfoByGroupId(?:\\/(?=$))?$/",
     "stack": [
-      "anonymous",
       "wrappedController"
     ]
   },
@@ -293,7 +291,6 @@
     "path": "/api/admin/getInfoByGroupIdDESC",
     "regexp": "/^\\/api\\/admin\\/getInfoByGroupIdDESC(?:\\/(?=$))?$/",
     "stack": [
-      "anonymous",
       "wrappedController"
     ]
   },
@@ -306,7 +303,6 @@
     "path": "/api/admin/findLiveInfoByName",
     "regexp": "/^\\/api\\/admin\\/findLiveInfoByName(?:\\/(?=$))?$/",
     "stack": [
-      "anonymous",
       "wrappedController"
     ]
   },
@@ -319,6 +315,18 @@
     "paramNames": [],
     "path": "/api/live",
     "regexp": "/^\\/api\\/live(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/live/getLiveInfoByRoomId",
+    "regexp": "/^\\/api\\/live\\/getLiveInfoByRoomId(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]

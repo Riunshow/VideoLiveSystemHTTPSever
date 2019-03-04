@@ -23,6 +23,8 @@ class LiveGroupController extends Controller {
 		this.ctx.body = response
 	}
 
+	// 根据分类id查询分类信息
+
 }
 
 module.exports = LiveGroupController

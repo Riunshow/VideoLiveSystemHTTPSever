@@ -81,21 +81,25 @@ module.exports = app => {
   // ----------------   直播相关接口
 
   // 获取直播分类信息
-  router.get('/api/admin/getLiveGroupList', isAdmin, controller.api.liveGroupController.getLiveGroupList)
+  router.get('/api/admin/getLiveGroupList', controller.api.liveGroupController.getLiveGroupList)
   
   // 添加一个新分类
   router.post('/api/admin/addNewLiveGroup', isAdmin, controller.api.liveGroupController.addNewLiveGroup)
 
   // 获取直播分类信息详情
-  router.post('/api/admin/getInfoByGroupId', isAdmin, controller.api.liveController.getInfoByGroupId)
+  router.post('/api/admin/getInfoByGroupId', controller.api.liveController.getInfoByGroupId)
 
   // 获取直播分类信息详情 根据房间人数排序
-  router.post('/api/admin/getInfoByGroupIdDESC', isAdmin, controller.api.liveController.getInfoByGroupIdDESC)
+  router.post('/api/admin/getInfoByGroupIdDESC', controller.api.liveController.getInfoByGroupIdDESC)
 
   // 直播分类信息详情 模糊搜索 主播名或房间名
-  router.post('/api/admin/findLiveInfoByName', isAdmin, controller.api.liveController.findLiveInfoByName)
+  router.post('/api/admin/findLiveInfoByName', controller.api.liveController.findLiveInfoByName)
 
+  // 获取所有直播列表
   router.get('/api/live', controller.api.liveController.getLiveList)
+
+  // 根据房间id获取房间信息
+  router.post('/api/live/getLiveInfoByRoomId', controller.api.liveController.getLiveInfoByRoomId)
 
   router.get('/api/live/start/:roomID', controller.api.liveController.startLiveStream)
 

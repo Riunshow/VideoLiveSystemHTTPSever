@@ -5,10 +5,11 @@ const Service = require('egg').Service;
 class LiveService extends Service {
   constructor(ctx) {
     super(ctx);
-    this.LiveModel = ctx.model.LiveModel;
-    this.UserModel = ctx.model.UserModel;
+    this.LiveModel = ctx.model.LiveModel
+    this.LiveGroupModel = ctx.model.LiveGroupModel
+    this.UserModel = ctx.model.UserModel
 
-    this.nsp = ctx.app.io.of('/');
+    this.nsp = ctx.app.io.of('/')
   }
 
   // 根据 live_gourp_id 查询所有的直播间
@@ -19,6 +20,9 @@ class LiveService extends Service {
       },
       include: [{
 				model: this.UserModel,
+				required: false 
+      },{
+				model: this.LiveGroupModel,
 				required: false 
 			}]
     })
@@ -88,8 +92,46 @@ class LiveService extends Service {
     }
   }
 
-  // 
-  
+  // 获取所有直播列表
+  async getLiveList(offset, limit) {
+    const data = await this.LiveModel.findAll({
+      where: {
+        status: 1,
+      },
+      include: [{
+				model: this.LiveGroupModel,
+				required: false 
+			}],
+      limit,
+      offset,
+    })
+    return {
+      success: true,
+      msg: '获取所有直播列表成功',
+      data
+    }
+  }
+
+  // 根据房间id获取房间信息
+  async getLiveInfoByRoomId(roomId) {
+    const data = await this.LiveModel.findOne({
+      where: {
+        roomId,
+      },
+      include: [{
+				model: this.UserModel,
+				required: false 
+      },{
+				model: this.LiveGroupModel,
+				required: false 
+			}]
+    })
+    return {
+      success: true,
+      msg: '获取房间信息成功',
+      data
+    }
+  }
 
   async _checkRoomStatus(roomID) {
     const data = await this.LiveModel.findOne({
@@ -100,18 +142,6 @@ class LiveService extends Service {
     const status = data === null ? -1 : data.get('status');
     return status;
   }
-  
-  async getLiveList(offset, limit) {
-    const data = await this.LiveModel.findAll({
-      where: {
-        status: 1,
-      },
-      limit,
-      offset,
-    });
-    return data;
-  }
-
 
   async startLiveStream(roomID) {
     const status = await this._checkRoomStatus(roomID);
