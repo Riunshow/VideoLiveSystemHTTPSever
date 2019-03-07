@@ -47,11 +47,10 @@ module.exports = app => {
 			}
     )
     
-    GiftModel.belongsTo(
+    GiftModel.hasMany(
 			app.model.GiftRecordModel, 
 			{
-				foreignKey: 'gift_record_id',
-				onDelete: 'cascade'
+				foreignKey: 'gift_id',
 			}
 		)
 	}

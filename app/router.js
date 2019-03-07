@@ -113,5 +113,20 @@ module.exports = app => {
 
   router.get('/api/live/search', controller.api.liveController.search)
 
+  // ----------------   礼物相关接口
+  // 添加默认礼物
+  router.post('/api/gift/addDefaultGift', controller.api.giftController.addDefaultGift)
+  
+  // 查询默认礼物列表
+  router.get('/api/gift/getDefaultGiftList', controller.api.giftController.getDefaultGiftList)
 
+  // 添加主播定制礼物
+  router.post('/api/gift/addPersonalGift', controller.api.giftController.addPersonalGift)
+
+  // 查询定制礼物列表
+  router.get('/api/gift/getPersonalGift', controller.api.giftController.getPersonalGift)
+
+  // 删除礼物
+  router.delete('/api/gift/deleteGift', controller.api.giftController.deleteGift)
+  
 }

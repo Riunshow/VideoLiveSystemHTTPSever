@@ -27,8 +27,8 @@ module.exports = app => {
 		GiftRecordModel.belongsTo(app.model.UserModel, {
       foreignKey: 'send_gift_user_id'
 		})
-		GiftRecordModel.hasMany(app.model.GiftModel, {
-      foreignKey: 'gift_record_id'
+		GiftRecordModel.belongsTo(app.model.GiftModel, {
+      foreignKey: 'gift_id'
 		})
 	}
 

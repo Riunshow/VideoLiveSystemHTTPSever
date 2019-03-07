@@ -144,34 +144,6 @@ module.exports = {
       updated_at: DATE,
     })
 
-    // gift record
-    await queryInterface.createTable('giftRecord', {
-      giftRecordId: {
-        type: INTEGER(20),
-        allowNull: false,
-        primaryKey: true,
-        autoIncrement: true,
-      },
-      get_gift_user_id: {
-        type: INTEGER(20),
-        allowNull: false,
-        references: {
-          model: 'user',
-          key: 'id'
-        },
-      },
-      send_gift_user_id: {
-        type: INTEGER(20),
-        allowNull: false,
-        references: {
-          model: 'user',
-          key: 'id'
-        },
-      },
-      created_at: DATE,
-      updated_at: DATE
-    })
-
     // gift
     await queryInterface.createTable('gift', {
       giftId: {
@@ -200,17 +172,46 @@ module.exports = {
           key: 'giftGroupId'
         },
       },
-      gift_record_id: {
+      created_at: DATE,
+      updated_at: DATE
+    })
+
+    // gift record
+    await queryInterface.createTable('giftRecord', {
+      giftRecordId: {
+        type: INTEGER(20),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      get_gift_user_id: {
         type: INTEGER(20),
         allowNull: false,
         references: {
-          model: 'giftRecord',
-          key: 'giftRecordId'
+          model: 'user',
+          key: 'id'
+        },
+      },
+      send_gift_user_id: {
+        type: INTEGER(20),
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id'
+        },
+      },
+      gift_id: {
+        type: INTEGER(20),
+        allowNull: false,
+        references: {
+          model: 'gift',
+          key: 'giftId'
         },
       },
       created_at: DATE,
       updated_at: DATE
     })
+
 
     // statistic
     await queryInterface.createTable('statistic', {
@@ -260,9 +261,9 @@ module.exports = {
     await queryInterface.dropTable('live')
     await queryInterface.dropTable('liveGroup')
     
+    await queryInterface.dropTable('giftRecord')
     await queryInterface.dropTable('gift')
     await queryInterface.dropTable('giftGroup')
-    await queryInterface.dropTable('giftRecord')
 
     await queryInterface.dropTable('user')
 
