@@ -12,7 +12,7 @@ class LiveService extends Service {
     this.nsp = ctx.app.io.of('/')
   }
 
-  // 根据 live_gourp_id 查询所有的直播间
+  // 根据 live_group_id 查询所有的直播间
   async getInfoByGroupId(live_group_id) {
     const data = await this.LiveModel.findAll({
       where: {
@@ -34,7 +34,7 @@ class LiveService extends Service {
     }
   }
 
-   // 根据 live_gourp_id 查询所有的直播间 根据房间人数排序
+   // 根据 live_group_id 查询所有的直播间 根据房间人数排序
    async getInfoByGroupIdDESC(live_group_id) {
     const data = await this.LiveModel.findAll({
       where: {

@@ -148,7 +148,6 @@
     "path": "/api/admin/userById",
     "regexp": "/^\\/api\\/admin\\/userById(?:\\/(?=$))?$/",
     "stack": [
-      "anonymous",
       "wrappedController"
     ]
   },
@@ -511,6 +510,42 @@
     "paramNames": [],
     "path": "/api/gift/deleteGift",
     "regexp": "/^\\/api\\/gift\\/deleteGift(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/gift/getGiftListByUserId",
+    "regexp": "/^\\/api\\/gift\\/getGiftListByUserId(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/gift/sendGIft",
+    "regexp": "/^\\/api\\/gift\\/sendGIft(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/gift/getRichPeopleByUserIdAndRoomId",
+    "regexp": "/^\\/api\\/gift\\/getRichPeopleByUserIdAndRoomId(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]

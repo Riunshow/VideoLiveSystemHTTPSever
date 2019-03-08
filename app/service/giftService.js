@@ -7,7 +7,8 @@ class GiftService extends Service {
 		super(ctx)
     this.UserModel = ctx.model.UserModel		
     this.GiftModel = ctx.model.GiftModel
-    this.GiftGroupModel = ctx.model.GiftGroupModel
+		this.GiftGroupModel = ctx.model.GiftGroupModel
+		this.GiftRecordModel = ctx.model.GiftRecordModel
 	}
 	
 	// 添加默认礼物
@@ -126,6 +127,88 @@ class GiftService extends Service {
       success: data !== 0 ? true : false,
       msg: data !== 0 ? '删除成功' : '删除失败',
     }
+	}
+
+  // 根据主播id查询所有礼物
+	async getGiftListByUserId(userId) {
+		const data = await this.GiftGroupModel.findAll({
+			where: {
+				user_id: userId
+			},
+			include: [{
+				model: this.GiftModel,
+				required: false 
+      }]
+		})
+
+		return { 
+      success: true,
+      msg: `查询定制礼物列表成功`, 
+      data
+    }
+	}
+
+	// 送礼物
+	async sendGIft(fromUserId, toUserId, giftId) {
+
+		const fromUserData = await this.UserModel.findUserByID(fromUserId)
+
+		const giftData = await this.GiftModel.findOne({
+			where: {
+				giftId
+			}
+		})
+
+		if (fromUserData.balance < giftData.price) {
+			return {
+				success: false,
+				msg: '积分不足'
+			}
+		}
+
+		await this.UserModel.update({
+			balance: fromUserData.balance - giftData.price
+		},{
+			where: {
+				id: fromUserId
+			},
+		})
+
+		const data = await this.GiftRecordModel.create({
+			send_gift_user_id: fromUserId,			
+			get_gift_user_id: toUserId,
+			gift_id: giftId
+		})
+
+		return {
+			success: true,
+			msg: '送礼物成功',
+			data
+		}
+	}
+
+	// 根据 主播id 获取 送礼物用户
+	async getRichPeopleByUserIdAndRoomId(userId) {
+		const data = await this.GiftRecordModel.findAll({
+			where: {
+				get_gift_user_id: userId
+			},
+			include: [{
+				model: this.GiftModel,
+				required: false 
+      },{
+				model: this.UserModel,
+				required: false 
+      }],
+      order: [['send_gift_user_id', 'DESC']],
+		})
+
+		return {
+			success: true,
+			msg: '查询礼物榜成功',
+			data
+		}
+
 	}
 
 }

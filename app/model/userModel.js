@@ -76,6 +76,7 @@ module.exports = app => {
       where: {
         id: userID,
       },
+      attributes: ['id', 'useraccount', 'nickname', 'avatar', 'role', 'balance', 'created_at', 'updated_at'],
     })
   }
 

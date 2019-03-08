@@ -17,7 +17,7 @@ class LiveController extends Controller {
     this.ctx.body = response
   }
 
-  // 根据 live_gourp_id 查询所有的直播间 根据房间人数排序
+  // 根据 live_group_id 查询所有的直播间 根据房间人数排序
   async getInfoByGroupIdDESC() {
     const { live_group_id } = this.ctx.request.body
     const response = await this.live.getInfoByGroupIdDESC(live_group_id)

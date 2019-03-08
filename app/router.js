@@ -53,7 +53,7 @@ module.exports = app => {
   router.get('/api/admin/userList', isAdmin, controller.api.adminController.getUserList)
 
   // 根据 userId 查找用户
-  router.post('/api/admin/userById', isAdmin, controller.api.adminController.getUserById)
+  router.post('/api/admin/userById', controller.api.adminController.getUserById)
 
   // 根据 user role 查找用户
   router.post('/api/admin/userByRole', isAdmin, controller.api.adminController.getUserByRole)
@@ -129,4 +129,13 @@ module.exports = app => {
   // 删除礼物
   router.delete('/api/gift/deleteGift', controller.api.giftController.deleteGift)
   
+  // 根据主播id查询所有礼物
+  router.post('/api/gift/getGiftListByUserId', controller.api.giftController.getGiftListByUserId)
+
+  // 送礼物
+  router.post('/api/gift/sendGIft', controller.api.giftController.sendGIft)
+
+  // 礼物榜查询
+  router.post('/api/gift/getRichPeopleByUserIdAndRoomId', controller.api.giftController.getRichPeopleByUserIdAndRoomId)
+
 }

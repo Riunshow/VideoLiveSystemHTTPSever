@@ -42,6 +42,26 @@ class GiftController extends Controller {
 		this.ctx.body = response
 	}
 
+  // 根据主播id查询所有礼物
+	async getGiftListByUserId() {
+		const { userId } = this.ctx.request.body
+		const response = await this.giftService.getGiftListByUserId(userId)
+		this.ctx.body = response
+	}
+
+	// 送礼物
+	async sendGIft() {
+		const { fromUserId, toUserId, giftId } = this.ctx.request.body
+		const response = await this.giftService.sendGIft(fromUserId, toUserId, giftId)
+		this.ctx.body = response
+	}
+
+	// 礼物榜查询
+	async getRichPeopleByUserIdAndRoomId() {
+		const { userId } = this.ctx.request.body
+		const response = await this.giftService.getRichPeopleByUserIdAndRoomId(userId)
+		this.ctx.body = response
+	}
 
 }
 
