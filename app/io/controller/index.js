@@ -7,9 +7,9 @@ class DefaultController extends Controller {
   async message() {
     const { ctx } = this;
 
-    const { room, userID } = ctx.socket.handshake.query;
+    const { roomId, userId } = ctx.socket.handshake.query;
     const message = ctx.args[0];
-    await ctx.socket.to(room).emit('msg', userID, message);
+    // await ctx.socket.to(roomId).emit('msg', userId, message);
   }
 
 
