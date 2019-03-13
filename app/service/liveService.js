@@ -164,8 +164,7 @@ class LiveService extends Service {
     if (status === 1) {
       this.LiveModel.update({
         status: 0,
-      }
-        , {
+      }, {
         where: {
           roomID,
         },

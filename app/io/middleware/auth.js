@@ -22,14 +22,16 @@ module.exports = () => {
       socket.emit('pissoff', 'roomId not found')
     }
     
-    const hasRoom = await LiveModel.findOne({
+    const currentRoom = await LiveModel.findOne({
       where: {
         roomID: roomId,
         // status: 1,
       },
     })
 
-    if (!hasRoom) {
+
+
+    if (!currentRoom) {
       tick(id, {
         type: 'deleted',
         message: 'deleted, roomId has been deleted.',
@@ -37,21 +39,66 @@ module.exports = () => {
       return
     }
 
-    socket.on('join', () => {
+
+    socket.on('join', async () => {
       socket.join(roomId)    // 加入房间
       nsp.to(roomId).emit('sys', '用户' + userId + '加入了房间' + roomId)
       console.log('用户' + userId + '加入了房间' + roomId)
+
+      // 根据房间id更新房间观众人数
+      currentRoom.Attendance += 1
+      await LiveModel.update({
+        Attendance: currentRoom.Attendance
+      },{
+        where: {
+          roomID: roomId
+        },
+      })
+      console.log('                    ')
+      console.log('       join             ')
+      console.log('************** Attendance : ', currentRoom.Attendance)
+      console.log('************** roomId : ', roomId)
+      console.log('                    ')
+      console.log('                    ')
     })
 
     socket.on('leave', (lastRoomId) => {
       socket.emit('disconnect', lastRoomId)
     })
 
-    socket.on('disconnect', (lastRoomId) => {
-      lastRoomIdT = lastRoomId
-      socket.leave(lastRoomId)
-      nsp.to(lastRoomId).emit('sys', '用户' + userId + '退出了房间' + lastRoomId)
-      console.log('用户' + userId + '退出了房间' + lastRoomId)
+    socket.on('disconnect', async (lastRoomId) => {
+      if (lastRoomId == 'client namespace disconnect') {
+        return 
+      }
+      console.log('-------------- leave ------------')
+      console.log(lastRoomId)
+      lastRoomIdT = lastRoomId == 'transport error' ? roomId : lastRoomId
+      socket.leave(lastRoomIdT)
+      nsp.to(lastRoomIdT).emit('sys', '用户' + userId + '退出了房间' + lastRoomIdT)
+      console.log('用户' + userId + '退出了房间' + lastRoomIdT)
+
+      // 根据房间id更新房间观众人数
+
+      const lastRoom = await LiveModel.findOne({
+        where: {
+          roomID: lastRoomIdT,
+        },
+      })
+      lastRoom.Attendance -=1
+
+      await LiveModel.update({
+        Attendance: lastRoom.Attendance
+      },{
+        where: {
+          roomID: lastRoomIdT
+        },
+      })
+      console.log('                    ')
+      console.log('       leave             ')
+      console.log('************** Attendance : ', lastRoom.Attendance)
+      console.log('************** roomId : ', lastRoomIdT)
+      console.log('                    ')
+      console.log('                    ')
     })
 
 
@@ -62,20 +109,19 @@ module.exports = () => {
 
 
     // 在线列表
-    nsp.adapter.clients(rooms, (err, clients) => {
-      console.log('**************  join')
+    nsp.adapter.clients(rooms, async (err, clients) => {
       // 更新在线用户列表
       nsp.to(roomId).emit('online', {
         clients,
         action: 'join',
         message: `User(${userId}) joined room${roomId}.`,
       })
+
     })
     await next()
 
 
-    nsp.adapter.clients(rooms, (err, clients) => {
-      console.log('**************  leaved')
+    nsp.adapter.clients(rooms, async (err, clients) => {
       // 更新在线用户列表
       nsp.to(roomId).emit('online', {
         clients,
