@@ -21,6 +21,19 @@ module.exports = app => {
   // -------- 公共接口
   router.get('/api/common/uploadToken', controller.api.commonController.generateSignature)
 
+  // ---------- 直播间申请接口
+
+	// 根据用户id查找用户申请状态
+  router.post('/api/wanted/getStatusByUserId', controller.api.liveWantedController.getStatusByUserId)
+  
+  // 修改用户申请状态
+  router.put('/api/wanted/setStatusByUserId', controller.api.liveWantedController.setStatusByUserId)
+
+  // 申请直播间
+  router.post('/api/wanted/sendWantedByUserId', controller.api.liveWantedController.sendWantedByUserId)
+
+
+
   // -------- 统计相关接口
 
   // 获取全部统计

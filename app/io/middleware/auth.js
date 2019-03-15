@@ -54,12 +54,6 @@ module.exports = () => {
           roomID: roomId
         },
       })
-      console.log('                    ')
-      console.log('       join             ')
-      console.log('************** Attendance : ', currentRoom.Attendance)
-      console.log('************** roomId : ', roomId)
-      console.log('                    ')
-      console.log('                    ')
     })
 
     socket.on('leave', (lastRoomId) => {
@@ -70,8 +64,6 @@ module.exports = () => {
       if (lastRoomId == 'client namespace disconnect') {
         return 
       }
-      console.log('-------------- leave ------------')
-      console.log(lastRoomId)
       lastRoomIdT = lastRoomId == 'transport error' ? roomId : lastRoomId
       socket.leave(lastRoomIdT)
       nsp.to(lastRoomIdT).emit('sys', '用户' + userId + '退出了房间' + lastRoomIdT)
@@ -93,12 +85,6 @@ module.exports = () => {
           roomID: lastRoomIdT
         },
       })
-      console.log('                    ')
-      console.log('       leave             ')
-      console.log('************** Attendance : ', lastRoom.Attendance)
-      console.log('************** roomId : ', lastRoomIdT)
-      console.log('                    ')
-      console.log('                    ')
     })
 
 

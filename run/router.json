@@ -18,6 +18,42 @@
       "POST"
     ],
     "paramNames": [],
+    "path": "/api/wanted/getStatusByUserId",
+    "regexp": "/^\\/api\\/wanted\\/getStatusByUserId(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "PUT"
+    ],
+    "paramNames": [],
+    "path": "/api/wanted/setStatusByUserId",
+    "regexp": "/^\\/api\\/wanted\\/setStatusByUserId(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/wanted/sendWantedByUserId",
+    "regexp": "/^\\/api\\/wanted\\/sendWantedByUserId(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
     "path": "/api/home/count",
     "regexp": "/^\\/api\\/home\\/count(?:\\/(?=$))?$/",
     "stack": [

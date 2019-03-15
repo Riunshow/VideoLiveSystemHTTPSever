@@ -254,10 +254,48 @@ module.exports = {
       updated_at: DATE
     })
 
+    // todayVisit
+    await queryInterface.createTable('liveWanted', {
+      wantedId: {
+        type: INTEGER(20),
+        allowNull: false,
+        primaryKey: true,
+        autoIncrement: true,
+      },
+      status: {
+        type: INTEGER(20),
+        allowNull: false,
+      },
+      realName: {
+        type: STRING(200),
+        allowNull: false,
+        defaultValue: '',
+      },
+      idCardNum: {
+        type: STRING(200),
+        allowNull: false,
+        defaultValue: '',
+      },
+      user_id: {
+        type: INTEGER(20),
+        allowNull: false,
+        references: {
+          model: 'user',
+          key: 'id'
+        },
+      },
+      created_at: DATE,
+      updated_at: DATE
+    })
+
   },
 
 
+
+
   async down(queryInterface) {
+    await queryInterface.dropTable('liveWanted')
+
     await queryInterface.dropTable('live')
     await queryInterface.dropTable('liveGroup')
     
