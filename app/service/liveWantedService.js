@@ -12,7 +12,9 @@ class LiveWantedService extends Service {
 	// 根据id查询
 	async getStatusByUserId(user_id) {
 		const data = await this.LiveWantedModel.findOne({
-			user_id
+			where: {
+				user_id
+			}
 		})
 
 		return {
@@ -61,6 +63,35 @@ class LiveWantedService extends Service {
       success: false,
       msg: '请勿多次发起申请',
     }
+	}
+	
+	// 重新申请
+	async sendWantedByUserIdAgain(user_id, realName, idCardNum) {
+		const result = await this.LiveWantedModel.update({
+			status: 1,
+			realName,
+			idCardNum
+		},{
+			where: {
+				user_id
+			},
+		})
+
+    return {
+      success: true,
+      msg: '重新申请成功',
+    }
+	}
+
+	// 获取所有申请记录
+	async getAllApplicationRecord() {
+		const data = await this.LiveWantedModel.findAll()
+
+		return {
+			success: true,
+			msg: '查找所有记录成功',
+			data
+		}
 	}
 
 

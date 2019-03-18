@@ -38,10 +38,30 @@ class LiveController extends Controller {
     this.ctx.body = response
   }
 
+  // 获取所有直播列表 根据人气排序
+  async getLivListByAttendance() {
+    const response = await this.live.getLivListByAttendance()
+    this.ctx.body = response
+  }
+
   // 根据房间id获取房间信息
   async getLiveInfoByRoomId() {
     const { roomId } = this.ctx.request.body
     const response = await this.live.getLiveInfoByRoomId(roomId)
+    this.ctx.body = response
+  }
+
+  // 开始直播
+  async applicationRoom() {
+    const { userID, title, cover, category } = this.ctx.request.body
+    const response = await this.live.applicationRoom(userID, title, cover, category)
+    this.ctx.body = response
+  }
+
+  // 通过token获取房间id
+  async getRoomIdByToken() {
+    const { token } = this.ctx.request.body
+    const response = await this.live.getRoomIdByToken(token)
     this.ctx.body = response
   }
 
@@ -53,12 +73,6 @@ class LiveController extends Controller {
   async shutLiveStream() {
     const { roomID } = this.ctx.params;
     const response = await this.live.shutLiveStream(roomID);
-    this.ctx.body = response;
-  }
-  async applicationRoom() {
-    const userID = this.ctx.session.user ? this.ctx.session.user.userID : null;
-    const { title, cover } = this.ctx.request.body;
-    const response = await this.live.applicationRoom(userID, title, cover);
     this.ctx.body = response;
   }
 

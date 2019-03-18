@@ -100,6 +100,11 @@ module.exports = {
         allowNull: false,
         deafultValue: 0
       },
+      token: {
+        type: STRING(200),
+        allowNull: false,
+        defaultValue: '',
+      },
       user_id: {
         type: INTEGER(20),
         allowNull: false,

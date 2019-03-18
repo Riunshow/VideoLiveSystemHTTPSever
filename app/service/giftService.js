@@ -41,7 +41,7 @@ class GiftService extends Service {
     const data = await this.GiftModel.findAll({
 			where: {
 				gift_group_id: 1
-			}
+			},
 		})
 
     return { 

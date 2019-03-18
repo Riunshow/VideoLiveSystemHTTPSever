@@ -27,11 +27,16 @@ module.exports = app => {
   router.post('/api/wanted/getStatusByUserId', controller.api.liveWantedController.getStatusByUserId)
   
   // 修改用户申请状态
-  router.put('/api/wanted/setStatusByUserId', controller.api.liveWantedController.setStatusByUserId)
+  router.put('/api/wanted/setStatusByUserId', isAdmin, controller.api.liveWantedController.setStatusByUserId)
 
   // 申请直播间
   router.post('/api/wanted/sendWantedByUserId', controller.api.liveWantedController.sendWantedByUserId)
 
+  // 重新申请
+  router.post('/api/wanted/sendWantedByUserIdAgain', controller.api.liveWantedController.sendWantedByUserIdAgain)
+
+  // 查找所有记录
+  router.get('/api/wanted/getAllApplicationRecord', controller.api.liveWantedController.getAllApplicationRecord)
 
 
   // -------- 统计相关接口
@@ -111,8 +116,18 @@ module.exports = app => {
   // 获取所有直播列表
   router.get('/api/live', controller.api.liveController.getLiveList)
 
+  // 获取所有直播列表 根据人气排序
+  router.get('/api/live/getLivListByAttendance', controller.api.liveController.getLivListByAttendance)
+
   // 根据房间id获取房间信息
   router.post('/api/live/getLiveInfoByRoomId', controller.api.liveController.getLiveInfoByRoomId)
+
+  // 开始直播
+  router.post('/api/live/application', isStreamer, controller.api.liveController.applicationRoom)
+
+  // 通过token获取room信息
+  router.post('/api/live/getRoomIdByToken', controller.api.liveController.getRoomIdByToken)
+
 
   router.get('/api/live/start/:roomID', controller.api.liveController.startLiveStream)
 
@@ -120,7 +135,6 @@ module.exports = app => {
 
   router.put('/api/live/:roomID/info', owned, controller.api.liveController.changeRoomInfo)
 
-  router.post('/api/live/application', isStreamer, controller.api.liveController.applicationRoom)
 
   router.delete('/api/live/:roomID', owned, controller.api.liveController.startLiveStream)
 

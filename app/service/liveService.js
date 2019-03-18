@@ -112,6 +112,25 @@ class LiveService extends Service {
     }
   }
 
+  // 获取所有直播列表 根据人气排序
+  async getLivListByAttendance() {
+    const data = await this.LiveModel.findAll({
+      where: {
+        status: 1,
+      },
+      include: [{
+				model: this.LiveGroupModel,
+				required: false 
+      }],
+      order: [['Attendance', 'DESC']],
+    })
+    return {
+      success: true,
+      msg: '获取所有直播列表成功',
+      data
+    }
+  }
+
   // 根据房间id获取房间信息
   async getLiveInfoByRoomId(roomId) {
     const data = await this.LiveModel.findOne({
@@ -130,6 +149,85 @@ class LiveService extends Service {
       success: true,
       msg: '获取房间信息成功',
       data
+    }
+  }
+
+  // 开始直播
+  async applicationRoom(user_id, title, cover, category) {
+    let message
+    if (!user_id) {
+      message = { 
+        success: false, 
+        msg: '未登录'
+      }
+    }else {
+      let data = await this.LiveModel.findOrCreate({
+        where: { user_id },
+        defaults: {
+          cover,
+          title,
+          status: 0,
+          Attendance: 0,
+          hot: 0,
+          token: this._guid(),
+          live_group_id: category
+        },
+      });
+      if (data[data.length - 1]) {
+        message = { 
+          success: true, 
+          msg: '创建成功', 
+          data 
+        }
+      }else {
+        await this.LiveModel.update({
+          token: this._guid(),
+          title, 
+          cover, 
+          category
+        }, {
+          where: {
+            user_id
+          },
+        })
+
+        let data = await this.LiveModel.findOne({
+          where: {
+            user_id
+          }
+        })
+
+        message = { 
+          success: true, 
+          msg: '该用户已经拥有直播间', 
+          data 
+        }
+      }
+    }
+
+    return message;
+  }
+
+  _randomNum() {
+    return (((1+Math.random())*0x10000)|0).toString(16).substring(1);
+  }
+
+  _guid() {
+      return (this._randomNum() + this._randomNum() + this._randomNum());
+  }
+
+  // 通过token获取房间id
+  async getRoomIdByToken(token) {
+    const data = await this.LiveModel.findOne({
+      where: {
+        token
+      }
+    })
+
+    return {
+      data,
+      msg:  '获取房间信息成功',
+      success: true
     }
   }
 
@@ -173,26 +271,7 @@ class LiveService extends Service {
     }
     return message;
   }
-  async applicationRoom(userID, cover, title) {
-    console.log(userID)
-    let message;
-    if (!userID) {
-      console.log(23333);
-      message = { error: true, data: '未登录' }
-    }else {
-      const data = await this.LiveModel.findOrCreate({
-        where: { user_id: userID },
-        defaults: {
-          cover,
-          title,
-        },
-      });
-      if (data[data.length - 1]) message = { error: false, data: '创建成功' };
-      else message = { error: true, data: '该用户已经拥有直播间' };
-    }
 
-    return message;
-  }
 
   async deleteRoom(roomID) {
     const data = await this._checkRoomStatus(roomID);

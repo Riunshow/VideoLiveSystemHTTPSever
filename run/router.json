@@ -33,6 +33,7 @@
     "path": "/api/wanted/setStatusByUserId",
     "regexp": "/^\\/api\\/wanted\\/setStatusByUserId(?:\\/(?=$))?$/",
     "stack": [
+      "anonymous",
       "wrappedController"
     ]
   },
@@ -44,6 +45,31 @@
     "paramNames": [],
     "path": "/api/wanted/sendWantedByUserId",
     "regexp": "/^\\/api\\/wanted\\/sendWantedByUserId(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/wanted/sendWantedByUserIdAgain",
+    "regexp": "/^\\/api\\/wanted\\/sendWantedByUserIdAgain(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/wanted/getAllApplicationRecord",
+    "regexp": "/^\\/api\\/wanted\\/getAllApplicationRecord(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]
@@ -357,11 +383,49 @@
   {
     "name": null,
     "methods": [
+      "HEAD",
+      "GET"
+    ],
+    "paramNames": [],
+    "path": "/api/live/getLivListByAttendance",
+    "regexp": "/^\\/api\\/live\\/getLivListByAttendance(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
       "POST"
     ],
     "paramNames": [],
     "path": "/api/live/getLiveInfoByRoomId",
     "regexp": "/^\\/api\\/live\\/getLiveInfoByRoomId(?:\\/(?=$))?$/",
+    "stack": [
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/live/application",
+    "regexp": "/^\\/api\\/live\\/application(?:\\/(?=$))?$/",
+    "stack": [
+      "anonymous",
+      "wrappedController"
+    ]
+  },
+  {
+    "name": null,
+    "methods": [
+      "POST"
+    ],
+    "paramNames": [],
+    "path": "/api/live/getRoomIdByToken",
+    "regexp": "/^\\/api\\/live\\/getRoomIdByToken(?:\\/(?=$))?$/",
     "stack": [
       "wrappedController"
     ]
@@ -433,19 +497,6 @@
     ],
     "path": "/api/live/:roomID/info",
     "regexp": "/^\\/api\\/live\\/((?:[^\\/]+?))\\/info(?:\\/(?=$))?$/",
-    "stack": [
-      "anonymous",
-      "wrappedController"
-    ]
-  },
-  {
-    "name": null,
-    "methods": [
-      "POST"
-    ],
-    "paramNames": [],
-    "path": "/api/live/application",
-    "regexp": "/^\\/api\\/live\\/application(?:\\/(?=$))?$/",
     "stack": [
       "anonymous",
       "wrappedController"

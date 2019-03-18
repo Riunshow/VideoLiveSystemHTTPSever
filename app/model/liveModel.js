@@ -46,6 +46,11 @@ module.exports = app => {
       type: INTEGER(11),
       allowNull: false,
       deafultValue: 0
+    },
+    token: {
+      type: STRING(200),
+      allowNull: false,
+      defaultValue: '',
     }
   }, {
     created_at: 'created_at',

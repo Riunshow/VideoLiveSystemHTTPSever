@@ -29,6 +29,19 @@ class LiveWantedController extends Controller {
 		this.ctx.body = response
 	}
 
+	// 用户重新申请
+	async sendWantedByUserIdAgain() {
+		const { user_id, realName, idCardNum } = this.ctx.request.body
+		const response = await this.LiveWantedService.sendWantedByUserIdAgain(user_id, realName, idCardNum)
+		this.ctx.body = response
+	}
+
+	// 查找所有记录
+	async getAllApplicationRecord() {
+		const response = await this.LiveWantedService.getAllApplicationRecord()
+		this.ctx.body = response
+	}
+
 
 }
 
