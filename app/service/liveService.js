@@ -152,7 +152,7 @@ class LiveService extends Service {
     }
   }
 
-  // 开始直播
+  // 直播间配置
   async applicationRoom(user_id, title, cover, category) {
     let message
     if (!user_id) {

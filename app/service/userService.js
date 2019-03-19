@@ -45,6 +45,23 @@ class UserService extends Service {
         isStreamer: role === 2,
         isAdmin: role === 3,
       }
+      let roleName = ''
+      switch (role) {
+        case -1:
+          roleName = '黑名单用户'
+          break;
+        case 1:
+          roleName = '普通用户'
+          break;
+        case 2:
+          roleName = '主播'
+          break;
+        case 3:
+          roleName = '管理员'
+          break;
+        default:
+          break;
+      }
 
       return {
         success: true,
@@ -54,6 +71,7 @@ class UserService extends Service {
             nickname: user.get('nickname'),
             avatar: user.get('avatar'),
             role,
+            roleName,
             id: user.get('id'),
             balance: user.get('balance')
           },
