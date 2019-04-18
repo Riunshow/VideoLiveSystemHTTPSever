@@ -123,7 +123,7 @@ module.exports = app => {
   router.post('/api/live/getLiveInfoByRoomId', controller.api.liveController.getLiveInfoByRoomId)
 
   // 开始直播
-  router.post('/api/live/application', isStreamer, controller.api.liveController.applicationRoom)
+  router.post('/api/live/application', controller.api.liveController.applicationRoom)
 
   // 通过token获取room信息
   router.post('/api/live/getRoomIdByToken', controller.api.liveController.getRoomIdByToken)

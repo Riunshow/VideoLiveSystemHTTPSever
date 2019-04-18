@@ -217,7 +217,6 @@ module.exports = {
       updated_at: DATE
     })
 
-
     // statistic
     await queryInterface.createTable('statistic', {
       statisticId: {
@@ -259,7 +258,7 @@ module.exports = {
       updated_at: DATE
     })
 
-    // todayVisit
+    // liveWanted
     await queryInterface.createTable('liveWanted', {
       wantedId: {
         type: INTEGER(20),

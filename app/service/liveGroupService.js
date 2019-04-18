@@ -2,7 +2,7 @@
 
 const Service = require('egg').Service;
 
-class LiveService extends Service {
+class LiveGroupService extends Service {
   constructor(ctx) {
     super(ctx)
     this.LiveGroupModel = ctx.model.LiveGroupModel
@@ -54,4 +54,4 @@ class LiveService extends Service {
 
 }
 
-module.exports = LiveService;
+module.exports = LiveGroupService;
